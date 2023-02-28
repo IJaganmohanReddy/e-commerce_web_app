@@ -1,0 +1,22 @@
+{
+  "name": "e-commerce_web_app",
+  "version": "1.0.0",
+  "description": "this is a e-commerce web application with basic functionalities",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\u001b[6~"
+  },
+  "author": "jaganmohan reddy",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
