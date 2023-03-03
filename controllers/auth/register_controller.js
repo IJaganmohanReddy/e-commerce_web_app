@@ -17,15 +17,14 @@ register: async(req,res,next)=>{
 
         const {error}= register_schema.validate(req.body)
          // here errror will b an object of class ValidationError
-        console.log("================= \n",req.body,error)
-        if(error){
+
+         if(error){
             return next(error)
         }
 
         try {
             const exists= await User.findOne({email: req.body.email})
             if(exists){
-                console.log("alreagr exists")
                 return next(Custom_errorHandler.alreadyExists("email already exists"))
             }
         } catch (err) {
@@ -44,8 +43,6 @@ register: async(req,res,next)=>{
        let access_token;
        try {
             const result = await user.save()
-            console.log("**",result)
-            //token 
             access_token=JwtService.sign({_id:result._id, role: result.role})
        
        
