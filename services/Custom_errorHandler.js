@@ -13,6 +13,13 @@ class Custom_errorHandler extends Error{
         return new Custom_errorHandler(401, message);
     }
 
+    static unauthorized(message= "unathorized"){
+        return new Custom_errorHandler(401, message);
+    }
+
+    static notFound(message= "not found"){
+        return new Custom_errorHandler(404, message);
+    }
 }
 
 module.exports= Custom_errorHandler

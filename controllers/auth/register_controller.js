@@ -1,8 +1,9 @@
 const joi= require('joi')
 const Custom_errorHandler= require('../../services/Custom_errorHandler')
-const {User}= require('../../models/index')
+const {User, Refresh_token}= require('../../models/index')
 const bcrypt= require('bcrypt')
 const JwtService= require('../../services/jwtService')
+const { JWT_REFRESH_SECRET } = require('../../config')
 
 const register_controller={
 
@@ -40,11 +41,12 @@ register: async(req,res,next)=>{
           password: hashedPassword
        })
        
-       let access_token;
+       let access_token,refresh_token;
        try {
             const result = await user.save()
-            access_token=JwtService.sign({_id:result._id, role: result.role})
-       
+            access_token=JwtService.sign({_id:result._id, role: result.role});
+            refresh_token=JwtService.sign({_id:result._id, role: result.role},'1y',JWT_REFRESH_SECRET)  
+            const data= await Refresh_token.create({refresh_token: refresh_token, is_active:true})     
        
         } catch (error) {
           next(error)
